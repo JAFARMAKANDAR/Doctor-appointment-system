@@ -1,0 +1,116 @@
+{% extends 'base.html' %}
+ {% block title %} Appointment system -Homepage {%endblock %} 
+ 
+ 
+ {% block body %} 
+{% load static %}
+
+<div class="container">
+  <div class="row">
+    <div class="col-6">
+      <p>
+        <h1>Select the doctor you are looking for treatment consultant</h1>
+        <br><br><br>  
+        <h3>Various professional doctors are available nearby to provide treatment and care for your health.</h3>
+      </p>
+    </div>
+    <div class="col-6">
+      <!-- Image displayed using the <img> tag -->
+      <div class="image-container">
+        <img src="{% static 'management/image/pics.jpg' %}" >
+      </div>
+    </div>
+  </div>  
+</div>
+
+  <br>
+        <div class="container" style="display: block;padding-bottom: 20px;">
+
+            <h2><b> Select and Book </b></h2><br>
+        </div>
+        <br>
+        <div class="specialty-container">
+            <div class="specialty-card">
+
+                <p>
+                   Dental <br>Specialist
+                </p>
+            </div>
+            <div class="specialty-card">
+
+                <p>
+                    Eye <br>Specialist
+                </p>
+            </div>
+            <div class="specialty-card">
+
+                <p>
+                    Cardio <br>specialist
+                </p>
+            </div>
+            <div class="specialty-card">
+
+                <p>
+                    Bone <br>specialist
+                </p>
+            </div>
+             <br>
+             <br>
+        </div>
+
+        <br>
+
+        <div style="display: flex; justify-content: center;">
+         <button style="border: 1px solid rgb(19, 18, 18); height: 40px;width: 120px;background-color: white;">
+                see more
+         </button>
+        </div>
+
+        <br>
+
+  <footer>
+    <div class="container">
+    <div class="left-side">
+          <h3>Doctor+</h3>
+    </div>
+
+      <div class="right-side">
+          <input type="email" placeholder="Enter Your email ID">
+          <button>Sign Up</button>
+      </div>
+
+      <div class="center">
+        <div class="footer-links">
+          <h3>About</h3>
+          <p>Service</p>
+          <p>Blog</p>
+        </div>
+        <div class="footer-links">
+          <h3>Information</h3>
+          <p>Sign Up</p>
+          <p>Join Community</p>
+          <p>Teams</p>
+        </div>
+        <div class="footer-links">
+          <h3>Contact Us</h3>
+          <p>Help & Support</p>
+          <p>Partner with Us</p>
+        </div>
+        <div class="footer-links">
+          <h3>Leagal</h3>
+          <p>Terms & Conditions</p>
+          <p>Cookie Policy</p>
+          <p>Privacy Policy</p>
+        </div>
+      </div>
+        <div class="social-icons justify-content: center;">
+          <img src="{% static 'management/image/facebook.jpg' %}" alt="Facebook">
+          <img src="{% static 'management/image/instagram.jpg' %}" alt="Instagram">
+          <img src="{% static 'management/image/X.jpg' %}" alt="Twitter">
+          <img src="{% static 'management/image/WhatsApp.jpg' %}" alt="WhatsApp">
+        </div>
+    </div>
+  </footer>
+
+
+ {% endblock %}
