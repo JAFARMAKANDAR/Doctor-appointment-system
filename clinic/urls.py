@@ -6,10 +6,11 @@ from django.conf.urls.static import static
 from management.views import *
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', index, name="ManagementHome"),
+    path('', index, name="home"),
     path('service/', Service, name="ManagementService"),
     path('about/', About, name="ManagementAbout"),
     path('register/', Register, name="ManagementRegister"),
-    path('login/', Login, name="ManagementLogin"),
+    path('admin_login/', Login, name='login'),
+    path('logout/', Logout_admin, name='logout'),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

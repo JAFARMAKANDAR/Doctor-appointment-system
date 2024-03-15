@@ -11,7 +11,7 @@
      <link rel="stylesheet" type="text/css" href="{% static 'management/css/mystyle.css' %}">
   </head>
   <body>
-    <nav class="navbar navbar-expand-lg sticky-top navbar-dark bg-primary">
+    <nav class="navbar navbar-expand-lg sticky-top navbar-light"  style="background-color: #632DE9;">
       <div class="container-fluid">
         <a class="navbar-brand" href="#">Doctor +</a>
         <form method="get" action="/search" class="d-flex" role="search">
@@ -54,8 +54,14 @@
             </li>
           </ul>
           <button type="button"   style="background-color: white;">
-             <a class="nav-link" href="/login">Login</a>
+             <a class="nav-link" href="/admin_login">Login</a>
           </button>
+
+          {% if request.user.is_staff %}
+            <button type="button"   style="background-color: white;">
+                 <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+            </button>
+          {% endif %}
         </div>
       </div>
     </nav>

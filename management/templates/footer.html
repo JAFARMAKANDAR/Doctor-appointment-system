@@ -13,7 +13,7 @@
     /*---------------------------------------
    Social section
 -----------------------------------------*/
-    footer {
+/*    footer {
       padding: 0px 0px 0px 0px;
       background-color: LightSkyBlue;
       margin: 0px;
@@ -58,60 +58,66 @@
     p {
       text-align: center;
 
-    }
+    } */
 
-    footer {
-background-color:  LightSkyBlue;
-color: #fff;
-padding: 20px 0;
-text-align: center;
+footer {
+  background-color: LightSkyBlue;
+  padding: 20px 0;
+
 }
 
+/* Container styles */
 .container {
-display: flex;
-justify-content: space-between;
-align-items: center;
-flex-wrap: wrap;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-direction: row;
+  color: black;   /* Set the text color to black */
 }
 
-.purple-button {
-background-color: purple;
-
-}
-
-
-.right-side {
-display: flex;
-align-items: center;
-}
-
+/* Left side styles */
 .left-side {
-display: flex;
-flex-direction: column;
-align-items: flex-start;
+  flex: 1;
+  align-self: flex-end;
+}
+/* Button color styles */
+.left-side button {
+  background-color:  rgb(178, 0, 211);      /* violet */
+  color: white;
+
 }
 
-.left-side h3 {
-align-self: flex-start;
+/* Right side styles */
+.right-side {
+  flex: 1;
+  align-self: flex-start;
 }
 
+
+
+/* Center section styles */
 .center {
-display: flex;
-justify-content: center;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  width: 100%;
 }
 
+/* Footer links styles */
 .footer-links {
-text-align: center;
-margin: 0 20px;
+  text-align: center;
+  margin: 20px; /* Adjust margin as needed */
+  padding: 20px 0;
 }
 
 
-.footer-links {
-margin-right: 20px;
-}
+
 
 .social-icons {
-margin-bottom: 10px;
+align-self: flex-end;
+ text-align: center;
+  color: black;
 }
 
 .social-icons img {
@@ -128,47 +134,49 @@ margin: 0 5px;
 
 
 {% load static %}
-        <div class="container">
-    <div class="left-side">
+ <div class="container">
+    <div class="right-side">
           <h3>Doctor+</h3>
     </div>
 
-      <div class="right-side">
-          <input type="email" placeholder="Enter Your email ID">
-          <button>Sign Up</button>
-      </div>
+    <div class="left-side">
+      <input type="email" placeholder="Enter Your email ID">
+      <button>Sign Up</button>
+    </div>
 
       <div class="center">
         <div class="footer-links">
-          <h3>About</h3>
+          <h4>About</h4>
           <p>Service</p>
           <p>Blog</p>
         </div>
         <div class="footer-links">
-          <h3>Information</h3>
+          <h4>Information</h4>
           <p>Sign Up</p>
           <p>Join Community</p>
           <p>Teams</p>
         </div>
         <div class="footer-links">
-          <h3>Contact Us</h3>
+          <h4>Contact Us</h4>
           <p>Help & Support</p>
           <p>Partner with Us</p>
         </div>
         <div class="footer-links">
-          <h3>Leagal</h3>
+          <h4>Leagal</h4>
           <p>Terms & Conditions</p>
           <p>Cookie Policy</p>
           <p>Privacy Policy</p>
         </div>
       </div>
-        <div class="social-icons ">
-          <img src="{% static 'management/image/facebook.jpg' %}" alt="Facebook">
-          <img src="{% static 'management/image/instagram.jpg' %}" alt="Instagram">
-          <img src="{% static 'management/image/X.jpg' %}" alt="Twitter">
-          <img src="{% static 'management/image/WhatsApp.jpg' %}" alt="WhatsApp">
-        </div>
-    </div>
+ </div>
+ <div class="social-icons ">
+          <h5> Follow us on </h5>
+    <img src="{% static 'management/image/facebook.jpg' %}" alt="Facebook">
+    <img src="{% static 'management/image/instagram.jpg' %}" alt="Instagram">
+    <img src="{% static 'management/image/X.jpg' %}" alt="Twitter">
+    <img src="{% static 'management/image/WhatsApp.jpg' %}" alt="WhatsApp">
+ </div>
+
 
 
 
