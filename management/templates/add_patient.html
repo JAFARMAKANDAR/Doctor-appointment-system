@@ -1,10 +1,51 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'homebase.html' %}
+{% block title %} Add_patient  {%  endblock %}
+{% load static %}
+{% block css %}
 
-</body>
-</html>
+
+{% endblock %}
+
+{% block body %}
+
+
+ <div class="container mt-50px">
+    <h2 class="text-center">Add Patient </h2>
+     <br>
+    <form method="post" action="">
+      {% csrf_token %}
+      <label  style="font-size: 12px;">Patient Name</label>
+      <input type ="text" class="form-control" name="name" required>
+
+      <label  style="font-size: 12px;">Gender</label>
+      <input type = "radio"  name="gender" value="Male">Male
+      <input type = "radio"  name="gender" value="Female">Female <br>
+
+      <label  style="font-size: 12px;">Contact</label>
+      <input type = "text" class="form-control" name="mobile" required>
+
+      <label  style="font-size: 12px;">Address</label>
+      <textarea class="form-control" name="address" required></textarea>
+      <br>
+      <input type = "submit" value="submit" class="form-control btn btn-primary"  style="font-size: 12px;">
+    </form>
+ </div>
+
+
+
+{% endblock %}
+
+{% block js %}
+ <script>
+      {% if error %}
+        {% if error == "no" %}
+            alert('Record Saved  Successfully');
+            window.location.href = "{% url 'view_patient' %}";
+        {% elif error == "yes" %}
+            alert('something went wrong, Try Again');
+        {% endif %}
+      {% endif %}
+ </script>
+
+
+{% endblock %}

@@ -1,0 +1,58 @@
+{% extends 'homebase.html' %}
+{% block title %} Add_Appointment  {%  endblock %}
+{% load static %}
+{% block css %}
+
+
+{% endblock %}
+
+{% block body %}
+
+
+ <div class="container mt-50px">
+    <h2 class="text-center">Add Appointment </h2>
+     <br>
+    <form method="post" action="">
+      {% csrf_token %}
+      <label  style="font-size: 12px;">Doctor Name</label>
+      <select name="doctor" class="form-control">
+        {% for i in doctor %}
+         <option value="{{i.name}}">{{i.name}} [{{i.id}}]</option>
+        {% endfor  %}
+      </select>
+      <br>
+      <label  style="font-size: 12px;">Patient</label>
+      <select name="patient" class="form-control">
+        {% for i in patient %}
+         <option value="{{i.name}}">{{i.name}} [{{i.id}}]</option>
+        {% endfor  %}
+      </select>
+      <br>
+      <label  style="font-size: 12px;">Date</label>
+      <input type = "date" class="form-control" name="date" required>
+
+      <label  style="font-size: 12px;">Time</label>
+     <input type = "time" class="form-control" name="time" required>
+      <br>
+      <input type = "submit" value="submit" class="form-control btn btn-primary"  style="font-size: 12px;">
+    </form>
+ </div>
+
+
+
+{% endblock %}
+
+{% block js %}
+ <script>
+      {% if error %}
+        {% if error == "no" %}
+            alert('Record Saved  Successfully');
+            window.location.href = "{% url 'view_appointment' %}";
+        {% elif error == "yes" %}
+            alert('something went wrong, Try Again');
+        {% endif %}
+      {% endif %}
+ </script>
+
+
+{% endblock %}

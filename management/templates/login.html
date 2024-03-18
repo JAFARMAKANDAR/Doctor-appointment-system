@@ -36,19 +36,21 @@
 {% endblock %}
 
 {% block body %}
-<div class="center-content">
-    <div class="container">
-        <h2>Admin Login</h2>
-        <form method="post">
-            {% csrf_token %}
-            <label for="uname">Admin Name</label>
-            <input type="text" class="form-control" name="uname" id="uname">
-            <label for="pwd">Password</label>
-            <input type="password" class="form-control" name="pwd" id="pwd">
-            <input type="submit" value="Login" class="form-control btn btn-primary">
-        </form>
+    <div class="container-fluid center-content">
+         <div class="col-md-10">
+            <div class="container">
+                <h2>Admin Login</h2>
+                <form method="post">
+                    {% csrf_token %}
+                    <label for="uname">Admin Name</label>
+                    <input type="text" class="form-control" name="uname" id="uname">
+                    <label for="pwd">Password</label>
+                    <input type="password" class="form-control" name="pwd" id="pwd">
+                    <input type="submit" value="Login" class="form-control btn btn-primary">
+                </form>
+            </div>
+         </div>
     </div>
-</div>
 {% endblock %}
 
 {% block js %}
