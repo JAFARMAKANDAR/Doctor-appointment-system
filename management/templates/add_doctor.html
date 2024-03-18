@@ -1,0 +1,54 @@
+{% extends 'homebase.html' %}
+{% block title %} Add_doctor {% endblock %}
+{% load static %}
+{% block css %}
+<style>
+  .center-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Adjust as needed */
+  }
+</style>
+{% endblock %}
+
+{% block body %}
+
+<div class="container-fluid center-content">
+  <div class="col-md-10"> <!-- Adjust the column width as needed -->
+    <h2 class="text-center mb-4">Add Doctor</h2>
+    <br>
+    <form method="post" action="">
+      {% csrf_token %}
+      <div class="form-group">
+        <label for="name" style="font-size: 20px;">Doctor Name</label>
+        <input type="text" class="form-control" id="name" name="name" required>
+      </div>
+      <div class="form-group">
+        <label for="contact" style="font-size: 20px;">Contact</label>
+        <input type="text" class="form-control" id="contact" name="contact" required>
+      </div>
+      <div class="form-group">
+        <label for="special" style="font-size: 20px;">Specialization</label>
+        <input type="text" class="form-control" id="special" name="special" required>
+      </div>
+      <br>
+      <input type="submit" value="Submit" class="form-control btn btn-primary" style="font-size: 12px;">
+    </form>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block js %}
+<script>
+  {% if error %}
+  {% if error == "no" %}
+  alert('Record Saved Successfully');
+  window.location.href = "{% url 'view_doctor' %}";
+  {% elif error == "yes" %}
+  alert('Something went wrong. Try again.');
+  {% endif %}
+  {% endif %}
+</script>
+{% endblock %}

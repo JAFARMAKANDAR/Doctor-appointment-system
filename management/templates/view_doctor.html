@@ -1,0 +1,59 @@
+{% extends 'homebase.html' %}
+{% block title %} View_doctor {% endblock %}
+{% load static %}
+{% block css %}
+<style>
+  .center-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Adjust as needed */
+  }
+</style>
+{% endblock %}
+
+{% block body %}
+<div class="container-fluid center-content"> <!-- Use container-fluid for full width -->
+  <div class="col-md-10"> <!-- Adjust the column width as needed -->
+    <h2 class="text-center mb-4">View Doctor</h2> <!-- Add the mb-4 class for margin-bottom -->
+    <table class="table table-hover" id="example" style="width: 100%;"> <!-- Set table width to 100% -->
+      <thead>
+        <tr>
+          <th>Doctor ID</th>
+          <th>Name</th>
+          <th>Contact</th>
+          <th>Specialization</th>
+          <th>Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for i in doc %}
+        <tr>
+          <td>{{i.id}}</td>
+          <td>{{i.name}}</td>
+          <td>{{i.mobile}}</td>
+          <td>{{i.special}}</td>
+          <td><a href="{% url 'delete_doctor' i.id %}" onclick="return confirm('Are you sure you want to delete?')" class="btn btn-danger">Delete</a></td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}
+
+{% block js %}
+<script>
+  $(document).ready(function() {
+    $('#example').DataTable({
+      dom: 'Bfrtip',
+      buttons: [
+        'copyHtml5',
+        'excelHtml5',
+        'csvHtml5',
+        'pdfHtml5'
+      ]
+    });
+  });
+</script>
+{% endblock %}
