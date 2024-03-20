@@ -1,51 +1,29 @@
 {% extends 'homebase.html' %}
 {% block title %} Admin_Login {%  endblock %}
 {% block css %}
-.center-content {
+ .center-form {
     display: flex;
-    flex-direction: column;
+    justify-content: center;
     align-items: center;
-    text-align: center;
-    margin-top: 50px;
-}
-
-.container {
-    width: 350px; /* Increased width to accommodate the form */
-}
-
-.container h2 {
-    margin-bottom: 20px;
-}
-
-.container label {
-    font-size: 12px;
-}
-
-.container input[type="text"],
-.container input[type="password"],
-.container input[type="submit"] {
-    font-size: 12px;
-    margin-bottom: 10px;
-    width: 100%;
-}
-
-.container input[type="submit"] {
-    cursor: pointer;
-}
-
+    height: 100vh; /* Adjust as needed */
+  }
 {% endblock %}
 
 {% block body %}
-    <div class="container-fluid center-content">
+    <div class="container">
          <div class="col-md-10">
-            <div class="container">
-                <h2>Admin Login</h2>
+            <div class="container-fluid center-content mt-50px">
+                <h2 class="text-center"> Admin Login</h2>
                 <form method="post">
                     {% csrf_token %}
-                    <label for="uname">Admin Name</label>
-                    <input type="text" class="form-control" name="uname" id="uname">
-                    <label for="pwd">Password</label>
-                    <input type="password" class="form-control" name="pwd" id="pwd">
+                    <div class="form-group">
+                        <label for="uname" style="font-size: 12px;">Admin Name</label>
+                        <input type="text" class="form-control" name="uname" id="uname">
+                    </div>
+                    <div class="form-group">
+                        <label for="pwd" style="font-size: 12px;">Password</label>
+                        <input type="password" class="form-control" name="pwd" id="pwd">
+                    </div>
                     <input type="submit" value="Login" class="form-control btn btn-primary">
                 </form>
             </div>

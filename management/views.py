@@ -6,9 +6,36 @@ from.models import *
 
 # Create your views here.
 def index(request):
-       if not request.user.is_staff:
-              return redirect('login')
-       return render(request, 'index.html')
+    # Check if the user is a staff member
+    if not request.user.is_staff:
+        return redirect('login')
+
+    # Count the number of doctors, patients, and appointments
+    d = Doctor.objects.count()
+    p = Patient.objects.count()
+    a = Appointment.objects.count()
+
+    # Get all doctors from the database
+    doctors = Doctor.objects.all()
+
+    # Create a dictionary to map specialties to lists of doctors
+    specialty_doctor_map = {}
+    for doctor in doctors:
+        specialty = doctor.special  # Access the 'special' attribute of the Doctor object
+        if specialty in specialty_doctor_map:
+            specialty_doctor_map[specialty].append(doctor)
+        else:
+            specialty_doctor_map[specialty] = [doctor]
+
+    context = {'d': d, 'p': p, 'a': a, 'specialty_doctor_map': specialty_doctor_map}
+    return render(request, 'index.html', context)
+
+
+def specialty_doctors(request, specialty):
+    doctors = Doctor.objects.filter(special=specialty)
+    context = {'specialty': specialty, 'doctors': doctors}
+    return render(request, 'specialty_doctors.html', context)
+
 
 def Service(request):
        return render(request, 'service.html')
@@ -16,6 +43,11 @@ def Service(request):
 
 def About(request):
        return render(request, 'about.html')
+
+
+def Contact(request):
+    return render(request, 'contact.html')
+
 
 def Register(request):
        return render(request, 'register.html')

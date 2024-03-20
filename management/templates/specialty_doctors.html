@@ -1,0 +1,38 @@
+{% extends 'homebase.html' %}
+{% block title %} Speciality_doctor {% endblock %}
+{% load static %}
+{% block css %}
+
+{% endblock %}
+
+{% block body %}
+
+    <h1>Doctors Specializing in {{ specialty }}</h1>
+
+    <!-- Display list of doctors -->
+    <ul>
+        {% for doctor in doctors %}
+        <h3><li>{{ doctor.name }} - {{ doctor.mobile }}</li></h3>
+        {% endfor %}
+    </ul>
+
+    <!-- Add links to appointment-related views -->
+    <div>
+        <h2>Appointment Actions</h2>
+        <ul>
+            <li><a href="{% url 'add_appointment' %}">Add Appointment</a></li>
+            <li><a href="{% url 'view_appointment' %}">View Appointments</a></li>
+        </ul>
+    </div>
+{% endblock %}
+
+
+
+{% block js %}
+
+
+
+<script>
+
+</script>
+{% endblock %}

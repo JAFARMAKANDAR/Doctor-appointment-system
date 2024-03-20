@@ -125,7 +125,27 @@ width: 30px;
 margin: 0 5px;
 }
 
+    .mydivstyle:hover{
+        box-shadow:0 0 20px 0 rgba(0,0,0,0.3);
+        transform:translateX(-30px)
+          /* For example, scaling the image */
+          transform: scale(1.1);
+          /* Adding a transition effect for smooth animation */
+          transition: transform 0.3s ease;
+    }
 
+.right-side h3:hover{
+color: black !important;
+font-weight: bold;
+}
+
+.social-icons a img:hover {
+
+  /* For example, scaling the image */
+  transform: scale(1.1);
+  /* Adding a transition effect for smooth animation */
+  transition: transform 0.3s ease;
+}
   </style>
   </head>
 
@@ -145,36 +165,37 @@ margin: 0 5px;
     </div>
 
       <div class="center">
-        <div class="footer-links">
-          <h4>About</h4>
+        <div class="footer-links mydivstyle">
+          <a class="footer-link" href="/about"><h4>About</h4>
           <p>Service</p>
-          <p>Blog</p>
+          <p>Blog</p></a>
         </div>
-        <div class="footer-links">
+        <div class="footer-links mydivstyle">
           <h4>Information</h4>
           <p>Sign Up</p>
           <p>Join Community</p>
           <p>Teams</p>
         </div>
-        <div class="footer-links">
-          <h4>Contact Us</h4>
+        <div class="footer-links mydivstyle">
+          <a class="footer-link" href="/contact"><h4>Contact Us</h4>
           <p>Help & Support</p>
-          <p>Partner with Us</p>
+          <p>Partner with Us</p></a>
         </div>
-        <div class="footer-links">
-          <h4>Leagal</h4>
+        <div class="footer-links mydivstyle">
+           <h4>Leagal</h4></a>
           <p>Terms & Conditions</p>
           <p>Cookie Policy</p>
           <p>Privacy Policy</p>
         </div>
       </div>
  </div>
+
  <div class="social-icons ">
           <h5> Follow us on </h5>
-    <img src="{% static 'management/image/facebook.jpg' %}" alt="Facebook">
-    <img src="{% static 'management/image/instagram.jpg' %}" alt="Instagram">
-    <img src="{% static 'management/image/X.jpg' %}" alt="Twitter">
-    <img src="{% static 'management/image/WhatsApp.jpg' %}" alt="WhatsApp">
+     <a href="#"><img src="{% static 'management/image/facebook.jpg' %}" alt="Facebook"></a>
+     <a href="#"><img src="{% static 'management/image/instagram.jpg' %}" alt="Instagram"></a>
+     <a href="#"><img src="{% static 'management/image/X.jpg' %}" alt="Twitter"></a>
+     <a href="https://wa.me/qr/FRLRHY7W6R6JA1"><img src="{% static 'management/image/WhatsApp.jpg' %}" alt="WhatsApp"></a>
  </div>
 
 

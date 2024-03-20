@@ -4,8 +4,9 @@ color: black !important;
 
 .nav-link:hover{
 color: black !important;
-background-color: purple;
+background-color: yellow;
 border-radius: 10px;
+font-weight: bold;
 }
 
 .navbar-brand:hover{
@@ -17,7 +18,4 @@ font-weight: bold;
 color: black !important;
 }
 
-.navbar {
-  background-color: rgb(47,36,145) !important;
-}
 

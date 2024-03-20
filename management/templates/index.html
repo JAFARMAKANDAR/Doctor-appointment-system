@@ -2,6 +2,48 @@
 {% block title %} Doctor + {%  endblock %}
 {% block css %}
 
+     .rounded{
+      border-top:8px solid lightblue;
+      border-radius:5px;
+     }
+      .mydivstyle:hover{
+        box-shadow:0 0 20px 0 rgba(0,0,0,0.3);
+        transform:translateY(-20px)
+    }
+
+.specialty-card {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
+    margin: 10px;
+    text-align: center;
+    width: 200px;
+    background-color: white; /* Add background color */
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* Add box shadow */
+}
+
+.specialty-card i {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.specialty-card p {
+    margin: 0;
+}
+
+.specialty-container {
+    display: flex;
+    flex-wrap: wrap; /* Allow cards to wrap to the next line */
+    justify-content: center; /* Center cards horizontally */
+}
+
+.hidden {
+    display: none; /* Initially hide the additional specialty cards */
+}
+
+
+
+
 .image-container {
 width: 1000px;
 height: 500px;
@@ -114,49 +156,92 @@ margin: 0 5px;
   </div>  
 </div>
 
-  <br>
-        <div class="container" style="display: block;padding-bottom: 20px;">
-            <h2><b> Select and Book </b></h2><br>
+    <div class="container mt-5 specialty-container">
+        <h2>Select and Book </h2>
+        <div class="row">
+            {% for specialty, doctors in specialty_doctor_map.items %}
+                <div class="col-md-3 mb-4 mydivstyle"> <!-- Adjust column size as needed -->
+                    <div class="specialty-card">
+                        {% if specialty == 'Cardiology' %}
+                            <i class="fas fa-heartbeat"></i>
+                        {% elif specialty == 'Dentistry' %}
+                            <i class="fas fa-tooth"></i>
+                        {% elif specialty == 'Orthopedics' %}
+                            <i class="fas fa-bone"></i>
+                        {% else %}
+                            <i class="fas fa-stethoscope"></i>
+                        {% endif %}
+                        <p>
+                            <a href="{% url 'specialty_doctors' specialty=specialty %}">{{ specialty }} <br>Specialist</a>
+                        </p>
+                        <!-- Display the count of doctors for the current specialty -->
+                        <p>Number of doctors: {{ doctors|length }}</p>
+                    </div>
+                </div>
+            {% endfor %}
         </div>
-        <br>
-        <div class="specialty-container">
-            <div class="specialty-card">
-
-                <p>
-                   Dental <br>Specialist
-                </p>
-            </div>
-            <div class="specialty-card">
-
-                <p>
-                    Eye <br>Specialist
-                </p>
-            </div>
-            <div class="specialty-card">
-
-                <p>
-                    Cardio <br>specialist
-                </p>
-            </div>
-            <div class="specialty-card">
-
-                <p>
-                    Bone <br>specialist
-                </p>
-            </div>
-             <br>
-             <br>
+        <div class="text-center mt-3">
+            <button id="seeMoreBtn" class="btn btn-primary">See More</button>
         </div>
+    </div>
 
-        <br>
 
-        <div style="display: flex; justify-content: center;">
-         <button style="border: 1px solid rgb(19, 18, 18); height: 40px;width: 120px;background-color: white;">
-                see more
-         </button>
-        </div>
-
-        <br>
 
 
  {% endblock %}
+
+
+
+
+
+{% block js %}
+
+
+<script>
+
+
+document.addEventListener("DOMContentLoaded", function() {
+    var container = document.querySelector(".specialty-container");
+    var seeMoreBtn = document.getElementById("seeMoreBtn");
+
+    // Function to add additional specialty cards
+    function addSpecialtyCards() {
+        // Sample additional specialties (can be fetched from backend)
+        var additionalSpecialties = ["New Specialty 1", "New Specialty 2"];
+        additionalSpecialties.forEach(function(specialty) {
+            var card = document.createElement("div");
+            card.classList.add("specialty-card");
+            card.innerHTML = `
+                <i class="fas fa-stethoscope"></i>
+                <p>${specialty}</p>
+            `;
+            container.appendChild(card);
+        });
+
+        // Hide the button if there are no additional specialties
+        if (additionalSpecialties.length === 0) {
+            seeMoreBtn.style.display = "none";
+        }
+    }
+
+    // Event listener for the "See More" button
+    seeMoreBtn.addEventListener("click", function() {
+        addSpecialtyCards();
+        seeMoreBtn.style.display = "none"; // Hide the button after revealing additional specialties
+    });
+
+
+
+    // Set moreSpecialtiesAvailable based on your logic
+    var moreSpecialtiesAvailable = true;
+
+    // Hide the button initially if there are no additional specialties
+    if (!moreSpecialtiesAvailable) {
+    seeMoreBtn.style.display = "none";
+    }
+});
+
+
+</script>
+
+{% endblock %}
