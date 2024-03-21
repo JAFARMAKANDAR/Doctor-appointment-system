@@ -37,6 +37,19 @@ def specialty_doctors(request, specialty):
     return render(request, 'specialty_doctors.html', context)
 
 
+#for showing signup/login button for admin(by jafar)
+def adminclick_view(request):
+    if request.user.is_authenticated:
+        return redirect('login')
+    return render(request, 'adminclick.html')
+
+def patientclick_view(request):
+    return render(request, 'patientclick.html')
+
+def doctorclick_view(request):
+    return render(request, 'doctorclick.html')
+
+
 def Service(request):
        return render(request, 'service.html')
 
@@ -71,9 +84,9 @@ def Login(request):
 
 def Logout_admin(request):
     if not request.user.is_staff:
-        return redirect('login')
+        return redirect('adminlogin')
     logout(request)
-    return redirect('login')
+    return redirect('adminlogin')
 
 
 

@@ -48,6 +48,9 @@
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             {% if not request.user.is_staff %}
             <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="/adminclick">Admin</a>
+            </li>
+            <li class="nav-item">
               <a class="nav-link active" aria-current="page" href="#">Home</a>
             </li>
             <li class="nav-item">
@@ -67,37 +70,36 @@
 
           {% if request.user.is_staff %}
             <li class="nav-item active">
-                    <a class="nav-link" href="{% url 'home' %}"> <i class="fa-solid fa-house-chimney"></i> Home <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="{% url 'home' %}"> <i class="fa-solid fa-house-chimney"></i> Home <span class="sr-only">(current)</span></a>
             </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#">Doctor </a>
-              <div class="dropdown-menu">
-                <a class="dropdown-item" href="{% url 'add_doctor' %}"> Add Doctor </a>
-                <a class="dropdown-item" href="{% url 'view_doctor'%}"> View Doctor </a>
-              </div>
+
+            <li class="nav-item">
+                <a class="nav-link"  href="/patientclick">Patient</a>
             </li>
+
+            <li class="nav-item">
+                <a class="nav-link"  href="/doctorclick">Doctor</a>
+            </li>
+
+
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#"> Patient </a>
+                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#">
+                    {% if request.user.is_authenticated %}
+                        welcome {{ request.user.username }}
+                    {% else %}
+                        Account
+                    {% endif %}
+                </a>
                 <div class="dropdown-menu">
-                    <a class="dropdown-item" href="{% url 'add_patient' %}"> Add Patient </a>
-                    <a class="dropdown-item" href="{% url 'view_patient' %}"> View Patient </a>
+                    <a class="dropdown-item" href="{% url 'logout' %}"> Logout </a>
                 </div>
             </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#"> Appointment </a>
-                <div class="dropdown-menu">
-                    <a class="dropdown-item" href="{% url 'add_appointment' %}"> Add Appointment </a>
-                    <a class="dropdown-item" href="{% url 'view_appointment' %}"> View Appointment </a>
-                </div>
-            </li>
 
 
 
 
 
-            <button type="button"   style="background-color: white;">
-                 <a class="nav-link" href="{% url 'logout' %}">Logout</a>
-            </button>
+
           {% endif %}
         </div>
       </div>
@@ -139,3 +141,22 @@
     {% block js %} {% endblock %}
   </body>
 </html>
+
+
+
+
+
+<!--
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#">Doctor </a>
+              <div class="dropdown-menu">
+                <a class="dropdown-item" href="{% url 'add_doctor' %}"> Add Doctor </a>
+                <a class="dropdown-item" href="{% url 'view_doctor'%}"> View Doctor </a>
+              </div>
+            </li>
+
+
+  <button type="button"   style="background-color: white;">
+                 <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+            </button>
+-->

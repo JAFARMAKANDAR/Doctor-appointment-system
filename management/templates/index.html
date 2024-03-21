@@ -75,89 +75,33 @@ margin-right: 10px;
 box-shadow: 0 12px 12px rgba(0, 0, 0, 0.2);
 }
 
-footer {
-background-color:  LightSkyBlue;
-color: #fff;
-padding: 20px 0;
-text-align: center;
-}
 
-.container {
-display: flex;
-justify-content: space-between;
-align-items: center;
-flex-wrap: wrap;
-}
-
-.purple-button {
-background-color: purple;
-
-}
-
-
-.right-side {
-display: flex;
-align-items: center;
-}
-
-.left-side {
-display: flex;
-flex-direction: column;
-align-items: flex-start;
-}
-
-.left-side h3 {
-align-self: flex-start;
-}
-
-.center {
-display: flex;
-justify-content: center;
-}
-
-.footer-links {
-text-align: center;
-margin: 0 20px;
-}
-
-
-.footer-links {
-margin-right: 20px;
-}
-
-.social-icons {
-margin-bottom: 10px;
-}
-
-.social-icons img {
-width: 30px;
-margin: 0 5px;
-}
 
 {% endblock %}
 
 {% block body %} 
 {% load static %}
-<div class="container">
-  <div class="row">
-    <div class="col-6">
-      <p>
-        <h1>Select the doctor you are looking for treatment consultant</h1>
-        <br><br><br>  
-        <h3>Various professional doctors are available nearby to provide treatment and care for your health.</h3>
-      </p>
-    </div>
-    <div class="col-6">
-      <!-- Image displayed using the <img> tag -->
-      <div class="image-container">
-        <img src="{% static 'management/image/pics.jpg' %}" >
+
+    <div class="container">
+      <div class="row">
+        <div class="col-6">
+          <p>
+            <h1>Select the doctor you are looking for treatment consultant</h1>
+            <br><br><br>
+            <h3>Various professional doctors are available nearby to provide treatment and care for your health.</h3>
+          </p>
+        </div>
+        <div class="col-6">
+          <!-- Image displayed using the <img> tag -->
+          <div class="image-container mt-5">
+            <img src="{% static 'management/image/pics.jpg' %}" >
+          </div>
+        </div>
       </div>
     </div>
-  </div>  
-</div>
 
+    <h2>Select and Book </h2>
     <div class="container mt-5 specialty-container">
-        <h2>Select and Book </h2>
         <div class="row">
             {% for specialty, doctors in specialty_doctor_map.items %}
                 <div class="col-md-3 mb-4 mydivstyle"> <!-- Adjust column size as needed -->

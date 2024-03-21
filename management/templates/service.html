@@ -1,10 +1,42 @@
 {% extends 'homebase.html' %}
 {% block title %} Service {%  endblock %}
+{% load static %}
+
  {% block css %}
+
 
  {% endblock %}
 
 {% block body %}
-{% load static %}
 <h1>this is service</h1>
+
+<div class="container">
+        <h1>Our Services</h1>
+        <ul>
+            <li>
+                <h2>Service 1</h2>
+                <p>Description of service 1 goes here. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                <p>Features:</p>
+                <ul>
+                    <li>Feature 1</li>
+                    <li>Feature 2</li>
+                    <li>Feature 3</li>
+                </ul>
+                <a href="#" class="btn">Learn More</a>
+            </li>
+            <li>
+                <h2>Service 2</h2>
+                <p>Description of service 2 goes here. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                <p>Features:</p>
+                <ul>
+                    <li>Feature 1</li>
+                    <li>Feature 2</li>
+                    <li>Feature 3</li>
+                </ul>
+                <a href="#" class="btn">Learn More</a>
+            </li>
+            <!-- Add more services as needed -->
+        </ul>
+    </div>
+
 {% endblock %}
