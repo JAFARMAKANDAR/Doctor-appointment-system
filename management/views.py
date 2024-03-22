@@ -1,13 +1,16 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, HttpResponse
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from.models import *
-
+from django.contrib import messages
+from django.views.decorators.cache import never_cache
 
 # Create your views here.
+
+
+
 def index(request):
-    # Check if the user is a staff member
-    if not request.user.is_staff:
+    if not request.user.is_authenticated:
         return redirect('login')
 
     # Count the number of doctors, patients, and appointments
@@ -65,33 +68,81 @@ def Contact(request):
 def Register(request):
        return render(request, 'register.html')
 
-def Login(request):
-    error = ""
+
+def Signup(request):
     if request.method == 'POST':
-        u = request.POST['uname']
-        p = request.POST['pwd']
-        user = authenticate(username=u, password=p)
+        username = request.POST.get('username')
+        fname = request.POST.get('fname')
+        lname = request.POST.get('lname')
+        email = request.POST.get('email')
+        pwd1 = request.POST.get('pwd1')
+        pwd2 = request.POST.get('pwd2')
+
+        # Check for errors in input
+        if len(username) > 10:
+            messages.error(request, "Username must be 10 characters or less")
+            return redirect('signup')
+
+        if not username.isalnum():
+            messages.error(request, "Username should only contain letters and numbers")
+            return redirect('signup')
+
+        if pwd1 != pwd2:
+            messages.error(request, "Passwords do not match")
+            return redirect('signup')
+
+        # Check if username or email already exists
+        if User.objects.filter(username=username).exists():
+            messages.error(request, "Username already taken")
+            return redirect('signup')
+
+        if User.objects.filter(email=email).exists():
+            messages.error(request, "Email already registered")
+            return redirect('signup')
+
+        # Create the user
+        myuser = User.objects.create_user(username, email, pwd1)
+        myuser.first_name = fname
+        myuser.last_name = lname
+        myuser.save()
+
+        messages.success(request, "Your admin account has been successfully created. Please login.")
+        return redirect('login')
+
+    else:
+        # Render the signup page template for GET request
+        return render(request, 'signup.html')
+
+
+def Login(request):
+    if request.method == 'POST':
+        loginusername = request.POST.get('loginusername')
+        loginpwd = request.POST.get('loginpwd')
+
+        user = authenticate(username=loginusername, password=loginpwd)
+
         if user is not None:
-            if user.is_staff:
-                login(request, user)
-                return redirect('home')
-            else:
-                error = "Invalid credentials"
+            login(request, user)
+            messages.success(request, "Successfully Logged in")
+            return redirect('home')  # Redirect to home page after successful login
         else:
-            error = "Invalid credentials"
+            messages.error(request, "Invalid Credentials, Please try again")
+            return render(request, 'login.html', {'error': True})  # Pass error message to the template
+    else:
+        return render(request, 'login.html')  # Render the login page for GET requests
 
-    return render(request, 'login.html', {'error': error})
 
+
+@never_cache
 def Logout_admin(request):
-    if not request.user.is_staff:
-        return redirect('adminlogin')
     logout(request)
-    return redirect('adminlogin')
+    messages.success(request, "Successfully Logged out  ")
+    return redirect('login')
 
 
 
 def Add_Doctor(request):
-    if not request.user.is_staff:
+    if not request.user.is_authenticated:
         return redirect('login')
     error = None
     if request.method == 'POST':
@@ -109,7 +160,7 @@ def Add_Doctor(request):
 
 
 def View_Doctor(request):
-    if not request.user.is_staff:
+    if not request.user.is_authenticated:
         return redirect('login')
     doc = Doctor.objects.all()
     d = {'doc': doc}
@@ -117,7 +168,7 @@ def View_Doctor(request):
 
 
 def Delete_Doctor(request,pid):
-    if not request.user.is_staff:
+    if not request.user.is_authenticated:
         return redirect('login')
     doctor = Doctor.objects.get(id=pid)
     doctor.delete()
@@ -126,7 +177,7 @@ def Delete_Doctor(request,pid):
 
 
 def View_Patient(request):
-    if not request.user.is_staff:
+    if not request.user.is_authenticated:
         return redirect('login')
     pat = Patient.objects.all()
     d = {'pat': pat}
@@ -134,7 +185,7 @@ def View_Patient(request):
 
 
 def Add_Patient(request):
-    if not request.user.is_staff:
+    if not request.user.is_authenticated:
         return redirect('login')
     error = None
     if request.method == 'POST':
@@ -152,7 +203,7 @@ def Add_Patient(request):
     return render(request, 'add_patient.html', {'error': error})
 
 def Delete_Patient(request,pid):
-    if not request.user.is_staff:
+    if not request.user.is_authenticated:
         return redirect('login')
     patient = Patient.objects.get(id=pid)
     patient.delete()
@@ -162,7 +213,7 @@ def Delete_Patient(request,pid):
 
 
 def View_Appointment(request):
-    if not request.user.is_staff:
+    if not request.user.is_authenticated:
         return redirect('login')
     appoint = Appointment.objects.all()
     d = {'appoint': appoint}
@@ -170,7 +221,7 @@ def View_Appointment(request):
 
 
 def Add_Appointment(request):
-    if not request.user.is_staff:
+    if not request.user.is_authenticated:
         return redirect('login')
     error = None  # Initialize the error variable
 
@@ -192,7 +243,7 @@ def Add_Appointment(request):
     return render(request, 'add_appointment.html', {'error': error, 'doctor': doctor1, 'patient': patient1})
 
 def Delete_Appointment(request,pid):
-    if not request.user.is_staff:
+    if not request.user.is_authenticated:
         return redirect('login')
     appointment = Appointment.objects.get(id=pid)
     appointment.delete()

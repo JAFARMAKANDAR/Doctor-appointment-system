@@ -25,8 +25,9 @@ urlpatterns = [
     path('register/', Register, name="ManagementRegister"),
 
 
-    path('admin_login/', Login, name='adminlogin'),
+    path('admin_login/', Login, name='login'),
     path('logout/', Logout_admin, name='logout'),
+    path('signup/', Signup, name='signup'),
 
 
     path('view_doctor/', View_Doctor, name='view_doctor'),

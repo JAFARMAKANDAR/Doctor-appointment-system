@@ -11,24 +11,29 @@
 
 {% block body %}
     <div class="container">
-         <div class="col-md-10">
-            <div class="container-fluid center-content mt-50px">
-                <h2 class="text-center"> Admin Login</h2>
-                <form method="post">
-                    {% csrf_token %}
-                    <div class="form-group">
-                        <label for="uname" style="font-size: 12px;">Admin Name</label>
-                        <input type="text" class="form-control" name="uname" id="uname">
-                    </div>
-                    <div class="form-group">
-                        <label for="pwd" style="font-size: 12px;">Password</label>
-                        <input type="password" class="form-control" name="pwd" id="pwd">
-                    </div>
-                    <input type="submit" value="Login" class="form-control btn btn-primary">
-                </form>
-            </div>
-         </div>
+    <div class="col-md-10">
+        <div class="container-fluid center-content mt-50px">
+            <h2 class="text-center">Admin Login</h2>
+            <form method="post" action="{% url 'login' %}">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="loginusername" style="font-size: 12px;">Admin Name</label>
+                    <input type="text" class="form-control" name="loginusername" id="loginusername" required>
+                </div>
+                <div class="form-group">
+                    <label for="loginpwd" style="font-size: 12px;">Password</label>
+                    <input type="password" class="form-control" name="loginpwd" id="loginpwd" required>
+                </div>
+
+                <button type="submit" value="Login" class="btn btn-primary">Submit</button>
+            </form>
+
+            <p>If you don't have an account, <a href="{% url 'signup' %}">create Admin account</a>.</p>
+
+        </div>
     </div>
+</div>
+
 {% endblock %}
 
 {% block js %}
