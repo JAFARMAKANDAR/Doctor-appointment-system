@@ -1,4 +1,16 @@
 {% extends 'homebase.html' %}
+{% block css %}
+     .rounded{
+      border-top:8px solid lightblue;
+      border-radius:5px;
+     }
+      .mydivstyle:hover{
+        box-shadow:0 0 20px 0 rgba(0,0,0,0.3);
+        transform:translateY(-20px)
+    }
+
+
+{% endblock %}
 <!--
 developed By : jafar
 
@@ -6,19 +18,24 @@ developed By : jafar
 
 {% block body %}
 
-<br>
-<br>
 
 <div class="jumbotron" style="margin-bottom:0px;">
   <h1 class="display-4" style="text-align:center;">Hello, Patient</h1>
   <p class="lead"> Welcome to Doctor Appointment System. </p>
   <hr class="my-4">
-  <p>You can access various features after Login/SignUp.</p>
-  <p class="lead">
-    <a class="btn btn-primary btn-lg" href="/add_patient" role="button">Register Your Account</a>
-    <a class="btn btn-primary btn-lg" href="/view_patient" role="button">View_patient</a>
-
-  </p>
+    <div class="row">
+     <div class="col-sm-4 text-center mydivstyle">
+       <h2 style="color:blue">{{p}}</h2>
+       <a href="{% url 'view_patient' %}"><h4 style="color:red">Patient</h4>
+       <hr class="rounded"> </a>
+     </div>
+   </div>
+  <div class="col-sm-4 text-center mydivstyle">
+      <p>You can access various features after Login/SignUp.</p>
+      <p class="lead">
+        <a class="btn btn-primary btn-lg" href="/add_patient" role="button">Register Your Account</a>
+      </p>
+  </div>
 </div>
 
 {% endblock  %}

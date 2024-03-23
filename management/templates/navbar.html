@@ -16,6 +16,9 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/2.0.2/css/dataTables.dataTables.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/3.0.1/css/buttons.dataTables.css">
 
+     <!-- Font Awesome CSS files -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
     <title>{% block title %}{% endblock %}</title>
 </head>
 <body>
@@ -36,7 +39,7 @@
                         <a class="nav-link active" aria-current="page" href="/adminclick">Admin</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                        <a class="nav-link active" aria-current="page"  href="#"> <i class="fa-solid fa-house-chimney"></i>Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/service">Service</a>
@@ -71,7 +74,7 @@
 
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#">
-                            Welcome, {{ request.user.username }}
+                            Welcome {{ request.user.username }}
                         </a>
                         <div class="dropdown-menu">
                             <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>

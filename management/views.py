@@ -35,22 +35,30 @@ def index(request):
 
 
 def specialty_doctors(request, specialty):
+    # Count the number of  appointments
+    a = Appointment.objects.count()
+
     doctors = Doctor.objects.filter(special=specialty)
-    context = {'specialty': specialty, 'doctors': doctors}
+    context = {'a': a, 'specialty': specialty, 'doctors': doctors}
     return render(request, 'specialty_doctors.html', context)
 
 
 #for showing signup/login button for admin(by jafar)
 def adminclick_view(request):
-    if request.user.is_authenticated:
-        return redirect('login')
     return render(request, 'adminclick.html')
 
 def patientclick_view(request):
-    return render(request, 'patientclick.html')
+    # Count the number of  patients
+    p = Patient.objects.count()
+    context = {'p': p}
+
+    return render(request, 'patientclick.html', context)
 
 def doctorclick_view(request):
-    return render(request, 'doctorclick.html')
+    # Count the number of doctors
+    d = Doctor.objects.count()
+    context = {'d': d}
+    return render(request, 'doctorclick.html', context)
 
 
 def Service(request):
@@ -67,6 +75,12 @@ def Contact(request):
 
 def Register(request):
        return render(request, 'register.html')
+
+def Legal(request):
+    return render(request, 'legal.html')
+
+def Information(request):
+    return render(request, 'information.html')
 
 
 def Signup(request):

@@ -23,6 +23,8 @@ urlpatterns = [
     path('about/', About, name="ManagementAbout"),
     path('contact/', Contact, name="ManagementContact"),
     path('register/', Register, name="ManagementRegister"),
+    path('legal/', Legal, name="ManagementLegal"),
+    path('information/', Information, name="ManagementInformation"),
 
 
     path('admin_login/', Login, name='login'),
