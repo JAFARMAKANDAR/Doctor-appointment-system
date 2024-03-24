@@ -1,0 +1,72 @@
+{% extends 'homebase.html' %}
+{% block title %} Patient History {%  endblock %}
+{% load static %}
+{% block css %}
+
+    /* Bootstrap container */
+    .container {
+        margin-top: 50px;
+    }
+
+    /* Dark gray color for headings */
+    h2 {
+        color: #333;
+    }
+
+    /* Add space between paragraphs */
+    p {
+        margin-bottom: 10px;
+    }
+
+    /* Make strong text bold */
+    strong {
+        font-weight: bold;
+    }
+
+    /* Add space above the form */
+    form {
+        margin-top: 20px;
+    }
+
+    /* Add space above the button */
+    button {
+        margin-top: 10px;
+    }
+
+    /* Darken and bolden the horizontal rule */
+    hr {
+        border-color: #333;
+        border-width: 6px;
+    }
+
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    <h2 class="text-center">Health History of {{ patient.name }}</h2>
+
+    {% if health_history %}
+    <p><strong>Medical History:</strong> {{ health_history.medical_history }}</p>
+    <p><strong>Family Medical History:</strong> {{ health_history.family_medical_history }}</p>
+    <p><strong>Social History:</strong> {{ health_history.social_history }}</p>
+    {% else %}
+    <p>No health history available.</p>
+    {% endif %}
+    <hr>
+
+    <div class="row">
+        <div class="col-md-12">
+            <h3>Update Health History</h3>
+            <form method="post">
+                <div class="form-group">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Update Health History</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

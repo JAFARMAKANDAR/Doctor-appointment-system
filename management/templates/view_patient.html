@@ -1,5 +1,5 @@
 {% extends 'homebase.html' %}
-{% block title %} View_doctor  {%  endblock %}
+{% block title %} View_patient  {%  endblock %}
 {% load static %}
 {% block css %}
 
@@ -18,6 +18,7 @@
                <th>Gender</th>
                <th>Contact</th>
                <th>Address</th>
+               <th>History</th>
                <th>Delete</th>
            </tr>
         </thead>
@@ -30,7 +31,12 @@
                 <td>{{i.gender}}</td>
                 <td>{{i.mobile}}</td>
                 <td>{{i.address}}</td>
-                <td><a href="{% url 'delete_patient' i.id %}" onclick="return confirm('Are u really want to delete?')" class="btn btn-danger">Delete</a></td>
+                <td>
+                    <a href="{% url 'patient_history' i.id %}" class="btn btn-info">View History</a>
+                </td>
+                <td>
+                    <a href="{% url 'delete_patient' i.id %}" onclick="return confirm('Are u really want to delete?')" class="btn btn-danger">Delete</a>
+                </td>
             </tr>
             {% endfor %}
         </tbody>

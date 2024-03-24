@@ -4,6 +4,12 @@ from django.contrib.auth import authenticate, login, logout
 from.models import *
 from django.contrib import messages
 from django.views.decorators.cache import never_cache
+from django.shortcuts import render, get_object_or_404
+from .forms import HealthHistoryForm
+from django.db import IntegrityError
+
+
+
 
 # Create your views here.
 
@@ -196,6 +202,50 @@ def View_Patient(request):
     pat = Patient.objects.all()
     d = {'pat': pat}
     return render(request, 'view_patient.html', d)
+
+
+
+def Patient_history(request, patient_id):
+    patient = get_object_or_404(Patient, pk=patient_id)
+    try:
+        health_history = HealthHistory.objects.get(patient=patient)
+    except HealthHistory.DoesNotExist:
+        health_history = None
+
+    if request.method == 'POST':
+        form = HealthHistoryForm(request.POST, instance=health_history)
+        if form.is_valid():
+            try:
+                form.save()
+                messages.success(request, 'Health history updated successfully.')
+                # Initialize form with a new instance to clear form fields
+                form = HealthHistoryForm()
+            except IntegrityError:
+                # Handle case where a HealthHistory instance already exists for the patient
+                messages.error(request, 'Error updating health history. A health history instance already exists for this patient.')
+        else:
+            messages.error(request, 'Error updating health history. Please correct the errors below.')
+    else:
+        form = HealthHistoryForm(instance=health_history)
+
+    return render(request, 'patient_history.html', {'patient': patient, 'health_history': health_history, 'form': form})
+def update_health_history(request, patient_id):
+    if request.method == 'POST':
+        form = HealthHistoryForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Health history updated successfully.')
+            # Redirect to the patient's history page after successful update
+            return redirect('patient_history', patient_id=patient_id)
+        else:
+            # Form data is invalid, render the form with error messages
+            messages.error(request, 'Error updating health history. Please correct the errors below.')
+    else:
+        # If it's not a POST request, create a new form instance
+        form = HealthHistoryForm()
+
+    return render(request, 'update_health_history.html', {'form': form})
+
 
 
 def Add_Patient(request):

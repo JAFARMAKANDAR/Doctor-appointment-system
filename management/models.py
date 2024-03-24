@@ -28,7 +28,14 @@ class Appointment(models.Model):
     def __str__(self):
         return self.doctor.name+"--"+self.patient.name
 
+class HealthHistory(models.Model):
+    patient = models.OneToOneField(Patient, on_delete=models.CASCADE)
+    medical_history = models.TextField()
+    family_medical_history = models.TextField()
+    social_history = models.TextField()
 
+    def __str__(self):
+        return f"Health History of {self.patient.name}"
 
 
 

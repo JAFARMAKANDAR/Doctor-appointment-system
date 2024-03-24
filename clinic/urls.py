@@ -34,6 +34,9 @@ urlpatterns = [
 
     path('view_doctor/', View_Doctor, name='view_doctor'),
     path('view_patient/', View_Patient, name='view_patient'),
+    path('patient_history/<int:patient_id>/', Patient_history, name='patient_history'),
+    path('update_health_history/<int:patient_id>/', update_health_history, name='update_health_history'),
+
     path('view_appointment/', View_Appointment, name='view_appointment'),
 
 
